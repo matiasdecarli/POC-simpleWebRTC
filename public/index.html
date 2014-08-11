@@ -1,15 +1,26 @@
 <!DOCTYPE html>
+<html>
     <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title></title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
-        <script src="jquery-1.10.2.min.js"></script>
+        <script src="http://simplewebrtc.com/latest.js"></script> 
     </head>
-    <body>       
-    	POC-squeleton
+    <body>
+        <video height="300" id="localVideo"></video>
+        <div id="remotesVideos"></div>
     </body>
+    <script>
+        var webrtc = new SimpleWebRTC({
+          // the id/element dom element that will hold "our" video
+          localVideoEl: 'localVideo',
+          // the id/element dom element that will hold remote videos
+          remoteVideosEl: 'remotesVideos',
+          // immediately ask for camera access
+          autoRequestMedia: true
+        });
+
+        // we have to wait until it's ready
+        webrtc.on('readyToCall', function () {
+          // you can name it anything
+          webrtc.joinRoom('room');
+        });
+    </script>
 </html>
